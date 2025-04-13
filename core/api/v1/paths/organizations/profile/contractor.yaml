@@ -1,0 +1,114 @@
+put:
+  tags:
+    - organizations
+  summary: Update contractor organization profile
+  description: |-
+    Обновляет профиль исполнителя.
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: organizationID
+      required: true
+      in: path
+      description: ID of organization
+      schema:
+        type: integer
+        minimum: 1
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            description:
+              $ref: "../../../properties/description.yaml"
+            city_ids:
+              type: array
+              items:
+                type: integer
+              example: [1, 2]
+            services:
+              type: array
+              items:
+                type: object
+                required:
+                  - service_id
+                  - measure_id
+                  - price
+                properties:
+                  service_id:
+                    type: integer
+                  measure_id:
+                    type: integer
+                  price:
+                    type: number
+                    format: float
+                example:
+                  service_id: 1
+                  measure_id: 1
+                  price: 500.00
+            objects_ids:
+              type: array
+              items:
+                type: integer
+              example: [1, 2]
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                type: object
+                required:
+                  - organization
+                  - profile
+                properties:
+                  organization:
+                    $ref: "../../../schemas/Organization.yaml"
+                  profile:
+                    $ref: "../../../schemas/ContractorInfo.yaml"
+    default:
+      $ref: "../../../responses/Error.yaml"
+
+get:
+  tags:
+    - organizations
+  summary: Get contractor organization profile
+  description: |-
+    Возвращает информацию об организации и профиле исполнителя.
+  parameters:
+    - name: organizationID
+      required: true
+      in: path
+      description: ID of organization
+      schema:
+        type: integer
+        minimum: 1
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                type: object
+                required:
+                  - organization
+                  - profile
+                properties:
+                  organization:
+                    $ref: "../../../schemas/Organization.yaml"
+                  profile:
+                    $ref: "../../../schemas/ContractorInfo.yaml"
+    default:
+      $ref: "../../../responses/Error.yaml"

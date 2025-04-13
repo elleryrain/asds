@@ -1,0 +1,38 @@
+type: object
+required:
+  - id
+  - object_type
+  - object
+  - content
+  - attachments
+  - status
+  - created_at
+properties:
+  id:
+    type: integer
+  reviewer:
+    $ref: "./EmployeeUser.yaml"
+  object_type:
+    $ref: "../properties/object_type.yaml"
+  object:
+    oneOf:
+      - $ref: "./Tender.yaml"
+      - $ref: "./Addition.yaml"
+      - $ref: "./Organization.yaml"
+      - $ref: "./question_answer/QuestionWithAnswer.yaml"
+  content:
+    type: string
+  attachments:
+    type: array
+    items:
+      $ref: "./Attachment.yaml"
+  status:
+    $ref: "../properties/verification_status.yaml"
+  review_comment:
+    type: string
+  created_at:
+    type: string
+    format: date-time
+  reviewed_at:
+    type: string
+    format: date-time

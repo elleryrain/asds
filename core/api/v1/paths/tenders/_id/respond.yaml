@@ -1,0 +1,88 @@
+post:
+  tags:
+    - tenders
+  summary: Create responds to a tender
+  description: Отправить отклик на тендер
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: tenderID
+      required: true
+      in: path
+      description: ID of tender
+      schema:
+        type: integer
+        minimum: 1
+      example: 1
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - price
+            - is_nds
+          properties:
+            price:
+              type: integer
+            is_nds: 
+              type: boolean
+
+  responses:
+    '200':
+      description: Success
+    default:
+      $ref: "../../../responses/Error.yaml"
+
+get:
+  tags:
+    - tenders
+  summary: Get responds to a tender
+  description: Получить все отклики на тендер
+  parameters:
+    - name: tenderID
+      required: true
+      in: path
+      description: ID of tender
+      schema:
+        type: integer
+        minimum: 1
+      example: 1
+    - name: page
+      in: query
+      description: Номер страницы
+      required: false
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+    - name: per_page
+      in: query
+      description: Количество элементов на странице
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 100
+  responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - data
+                - pagination
+              properties:
+                data:
+                  type: array
+                  items:
+                    $ref: "../../../schemas/Respond.yaml"
+                pagination:
+                  $ref: "../../../schemas/Pagination.yaml"
+                  
+      default:
+        $ref: "../../../responses/Error.yaml"

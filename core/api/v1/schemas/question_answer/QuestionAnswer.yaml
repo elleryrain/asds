@@ -1,0 +1,20 @@
+type: object
+required:
+  - id
+  - type
+  - content
+  - verification_status
+properties:
+  id:
+    type: integer
+    example: 3
+  parent_id:
+    type: integer
+    example: 1
+  type:
+    $ref: "../../properties/question_answer_type.yaml"
+  content:
+    type: string
+    example: Текст ответа или вопроса
+  verification_status:
+    $ref: "../../properties/verification_status.yaml"

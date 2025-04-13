@@ -1,0 +1,11 @@
+type: object
+required:
+  - url
+properties:
+  name:
+    type: string
+    description: Название элемента
+    example: example
+  url:
+    type: string
+    format: uri

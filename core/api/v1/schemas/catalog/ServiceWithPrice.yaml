@@ -1,0 +1,13 @@
+type: object
+required:
+  - service
+  - measure
+  - price
+properties:
+  service:
+    $ref: "./Service.yaml"
+  measure:
+    $ref: "./Measure.yaml"
+  price:
+    type: number
+    format: float

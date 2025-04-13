@@ -1,0 +1,94 @@
+post:
+  tags:
+    - tenders
+  summary: Create tender question or answer
+  description: |
+    Заказчик: Отвечает на вопрос
+
+    Исполнитель: Создает вопрос для тендера
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: tenderID
+      required: true
+      in: path
+      description: ID of tender
+      schema:
+        type: integer
+        minimum: 1
+      example: 1
+    - name: type
+      required: true
+      in: query
+      description: Тип записи
+      schema:
+        $ref: "../../../properties/question_answer_type.yaml"
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - content
+          properties:
+            parent_id:
+              type: integer
+              description: Идентификатор вопроса, для которого создан ответ (null для вопросов)
+              example: 1
+            content:
+              type: string
+              description: Текст вопроса или ответа
+              example: Какова минимальная цена?     
+  responses:
+    '201':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                $ref: "../../../schemas/question_answer/QuestionAnswer.yaml"
+    default:
+      $ref: "../../../responses/Error.yaml"
+
+get:
+  tags:
+    - tenders
+  summary: Get questions and answers for a tender
+  security:
+    - bearerAuth: []
+    - {}
+  description: |
+    Получение вопросов-ответов с фильтрацией:
+    1. **Создатель тендера**: вопросы со статусом approved, все ответы.
+    2. **Авторизированный пользователь**: все свои вопросы; остальные вопросы и ответы со статусом approved.
+    3. **Неавторизированный пользователь**: вопросы и ответы статусом approved.
+  parameters:
+    - name: tenderID
+      required: true
+      in: path
+      description: ID of tender
+      schema:
+        type: integer
+        minimum: 1
+      example: 1
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: "../../../schemas/question_answer/QuestionWithAnswer.yaml"    
+    default:
+      $ref: "../../../responses/Error.yaml"

@@ -1,0 +1,38 @@
+type: object
+required:
+  - id
+  - email
+  - phone
+  - first_name
+  - last_name
+  - email_verified
+  - role
+  - is_banned
+  - created_at
+  - updated_at
+properties:
+  id:
+    type: integer
+  email:
+    $ref: "../properties/email.yaml"
+  phone:
+    $ref: "../properties/phone.yaml"
+  first_name:
+    $ref: "../properties/name.yaml"
+  last_name:
+    $ref: "../properties/name.yaml"
+  middle_name:
+    $ref: "../properties/name.yaml"
+  avatar_url:
+    type: string
+    format: uri
+  email_verified:
+    type: boolean
+  is_banned:
+    type: boolean
+  created_at:
+    type: string
+    format: date-time
+  updated_at:
+    type: string
+    format: date-time

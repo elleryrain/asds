@@ -1,0 +1,72 @@
+delete:
+  tags:
+    - organizations
+  summary: Remove a portfolio from the contractor's profile
+  description: |-
+    Удаляет портфолио из профиля исполнителя.
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: portfolioID
+      in: path
+      required: true
+      description: Уникальный идентификатор портфолио
+      schema:
+        type: integer
+        minimum: 1
+      example: 1
+  responses:
+    '200':
+      description: Успешное удаление
+    default:
+      $ref: "../../../responses/Error.yaml"
+
+put:
+  tags:
+    - organizations
+  summary: Update a portfolio in the contractor's profile
+  description: |-
+    Обновляет информацию о портфолио в профиле исполнителя.
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: portfolioID
+      in: path
+      required: true
+      description: Уникальный идентификатор портфолио
+      schema:
+        type: integer
+        minimum: 1
+      example: 1
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            title:
+              type: string
+              example: Портфолио 1
+            description:
+              $ref: "../../../properties/description.yaml"
+            attachments:
+              type: array
+              items:
+                type: string
+                format: uri
+              maxItems: 8
+  responses:
+    '200':
+      description: Успешное обновление
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                $ref: "../../../schemas/Portfolio.yaml"
+    default:
+      $ref: "../../../responses/Error.yaml"

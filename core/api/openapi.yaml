@@ -1,0 +1,133 @@
+openapi: 3.0.3
+servers:
+  - description: local
+    url: /
+  - description: dev
+    url: https://api.ubrato.ru
+info:
+  title: Ubrato core
+  description: ubrato core oas
+  version: 1.0.0
+paths:
+  /v1/auth/signin:
+    $ref: "v1/paths/auth/signin.yaml"
+  /v1/auth/logout:
+    $ref: "v1/paths/auth/logout.yaml"
+  /v1/auth/signup:
+    $ref: "v1/paths/auth/signup.yaml"
+  /v1/auth/user:
+    $ref: "v1/paths/auth/user.yaml"
+  /v1/auth/refresh:
+    $ref: "v1/paths/auth/refresh.yaml"
+
+  /v1/tenders:
+    $ref: "v1/paths/tenders/_index.yaml"
+  /v1/tenders/{tenderID}:
+    $ref: "v1/paths/tenders/_id/_index.yaml"
+  /v1/tenders/{tenderID}/additions:
+    $ref: "v1/paths/tenders/_id/addition.yaml"
+  /v1/tenders/{tenderID}/respond:
+    $ref: "v1/paths/tenders/_id/respond.yaml"
+  /v1/tenders/{tenderID}/question-answer:
+    $ref: "v1/paths/tenders/_id/question_answer.yaml"
+  /v1/tenders/{tenderID}/winners:
+    $ref: "v1/paths/tenders/winners/winners.yaml"
+  /v1/tenders/winners/{winnerID}/aprove:
+    $ref: "v1/paths/tenders/winners/aprove.yaml"
+  /v1/tenders/winners/{winnerID}/deny:
+    $ref: "v1/paths/tenders/winners/deny.yaml"
+
+  /v1/users:
+    $ref: "v1/paths/users/_index.yaml"
+  /v1/users/confirm/email:
+    $ref: "v1/paths/users/confirm/email.yaml"
+  /v1/users/confirm/password:
+    $ref: "v1/paths/users/confirm/password.yaml"
+  /v1/users/request/email-verification:
+    $ref: "v1/paths/users/request/email_verification.yaml"
+  /v1/users/request/reset-password:
+    $ref: "v1/paths/users/request/reset_password.yaml"
+  /v1/users/{userID}:
+    $ref: "v1/paths/users/_id/_index.yaml"
+
+  /v1/questionnaire:
+    $ref: "v1/paths/questionnaire/_index.yaml"
+  /v1/questionnaire/{organizationID}:
+    $ref: "v1/paths/questionnaire/organization_id/_index.yaml"
+  /v1/questionnaire/{organizationID}/status:
+    $ref: "v1/paths/questionnaire/organization_id/status.yaml"
+
+  /v1/employee:
+    $ref: "v1/paths/employee/_index.yaml"
+
+  /v1/organizations:
+    $ref: "v1/paths/organizations/_index.yaml"
+  /v1/organizations/{organizationID}: 
+    $ref: "v1/paths/organizations/_id/_index.yaml"
+  /v1/organizations/contractors:
+    $ref: "v1/paths/organizations/contractors.yaml"
+  /v1/organizations/{organizationID}/profile/brand:
+    $ref: "v1/paths/organizations/profile/brand.yaml"
+  /v1/organizations/{organizationID}/profile/contacts:
+    $ref: "v1/paths/organizations/profile/contacts.yaml"
+  /v1/organizations/{organizationID}/profile/customer:
+    $ref: "v1/paths/organizations/profile/customer.yaml"
+  /v1/organizations/{organizationID}/profile/contractor:
+    $ref: "v1/paths/organizations/profile/contractor.yaml"
+  /v1/organizations/portfolio/{portfolioID}:
+    $ref: "v1/paths/organizations/portfolio/_id.yaml"
+  /v1/organizations/{organizationID}/portfolio:
+    $ref: "v1/paths/organizations/portfolio/_index.yaml"
+  /v1/organizations/{organizationID}/favourites:
+    $ref: "v1/paths/organizations/favourites/_index.yaml"
+  /v1/organizations/favourites/{favouriteID}:
+    $ref: "v1/paths/organizations/favourites/_id.yaml"
+  /v1/organizations/{organizationID}/tenders:
+    $ref: "v1/paths/organizations/_id/tenders.yaml"
+
+  /v1/verifications/{requestID}/aprove:
+    $ref: "v1/paths/verifications/_id/aprove.yaml"
+  /v1/verifications/{requestID}/deny:
+    $ref: "v1/paths/verifications/_id/deny.yaml"
+  /v1/verifications/{requestID}:
+    $ref: "v1/paths/verifications/_id/_index.yaml"
+  /v1/verifications/organizations:
+    $ref: "v1/paths/verifications/organization/_index.yaml"
+  /v1/verifications/organizations/{organizationID}:
+    $ref: "v1/paths/verifications/organization/_id.yaml"
+  /v1/verifications/tenders:
+    $ref: "v1/paths/verifications/tenders.yaml"
+  /v1/verifications/additions:
+    $ref: "v1/paths/verifications/additions.yaml"
+  /v1/verifications/question-answer:
+    $ref: "v1/paths/verifications/question_answer.yaml"
+
+  /v1/catalog/services:
+    $ref: "v1/paths/catalog/services.yaml"
+  /v1/catalog/objects:
+    $ref: "v1/paths/catalog/objects.yaml"
+  /v1/catalog/cities:
+    $ref: "v1/paths/catalog/cities.yaml"
+  /v1/catalog/regions:
+    $ref: "v1/paths/catalog/regions.yaml"
+  /v1/catalog/measurements:
+    $ref: "v1/paths/catalog/measure.yaml"
+
+  /v1/survey:
+    $ref: "v1/paths/survey/_index.yaml"
+
+  /v1/suggest/company:
+    $ref: "v1/paths/suggest/company.yaml"
+  /v1/suggest/city:
+    $ref: "v1/paths/suggest/city.yaml"
+
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: ubrato_session
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

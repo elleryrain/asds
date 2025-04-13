@@ -1,0 +1,75 @@
+get:
+  tags:
+    - users
+  summary: Get user by id
+  description: |-
+    Returns user by id
+
+    **[Role](https://youtrack.ubrato.ru/articles/UBR-A-7/Roli-privilegii) required**:
+    'Employee' or higher.
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: userID
+      required: true
+      in: path
+      description: ID of user
+      schema:
+        type: integer
+        minimum: 1
+      example: 1
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                $ref: "../../../schemas/RegularUser.yaml"
+    default:
+      $ref: "../../../responses/Error.yaml"
+
+put:
+  tags:
+    - users
+  summary: Update user profile
+  description: |-
+   Обновляет информацию профиля пользователя.
+  security:
+  - bearerAuth: []
+  parameters:
+    - name: userID
+      required: true
+      in: path
+      description: ID of user
+      schema:
+        type: integer
+        minimum: 1
+      example: 1
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            first_name:
+              $ref: "../../../properties/name.yaml"
+            last_name:
+              $ref: "../../../properties/name.yaml"
+            middle_name:
+              $ref: "../../../properties/name.yaml"
+            phone:
+              $ref: "../../../properties/phone.yaml"
+            avatar_url:
+              type: string
+              format: uri
+  responses:
+    '200':
+      description: Success
+    default:
+      $ref: "../../../responses/Error.yaml"

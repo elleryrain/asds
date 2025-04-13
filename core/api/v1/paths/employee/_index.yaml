@@ -1,0 +1,49 @@
+post:
+  tags:
+    - employee
+  summary: Create employee user
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - email
+            - phone
+            - password
+            - first_name
+            - last_name
+            - role
+            - position
+          properties:
+            email:
+              $ref: "../../properties/email.yaml"
+            phone:
+              $ref: "../../properties/phone.yaml"
+            password:
+              $ref: "../../properties/password.yaml"
+            first_name:
+              $ref: "../../properties/name.yaml"
+            last_name:
+              $ref: "../../properties/name.yaml"
+            middle_name:
+              $ref: "../../properties/name.yaml"
+            role:
+              $ref: "../../properties/role.yaml"
+            position:
+              type: string
+  responses:
+    '201':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                $ref: "../../schemas/EmployeeUser.yaml"
+    default:
+      $ref: "../../responses/Error.yaml"

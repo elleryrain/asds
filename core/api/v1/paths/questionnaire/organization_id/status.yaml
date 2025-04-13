@@ -1,0 +1,39 @@
+get:
+  tags:
+    - questionnaire
+  summary: Get contractor's questionnaire status
+  description: |-
+    Retrieve the status of a contractor's questionnaire.
+  security:
+  - bearerAuth: []
+  parameters:
+    - name: organizationID
+      required: true
+      in: path
+      description: ID of organization
+      schema:
+        type: integer
+        minimum: 1
+      example: 1
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                type: object
+                required:
+                  - is_completed
+                properties:
+                  is_completed:
+                    type: boolean
+                    description: the questionnaire is completed
+                    default: false
+                  
+    default:
+      $ref: "../../../responses/Error.yaml"

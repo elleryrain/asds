@@ -1,0 +1,19 @@
+services:
+  # nats:
+  #   image: nats:2.10.14-alpine3.19
+  #   ports:
+  #     - "4222:4222"
+  #     - "6222:6222"
+  #     - "8222:8222"
+  #   command:
+  #     - "--http_port=8222"
+  #     - "--js"
+  #     - "--sd=/data"
+  postgres:
+    image: postgres
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "amo-sync"

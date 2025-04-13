@@ -1,0 +1,84 @@
+type: object
+required:
+  - id
+  - organization
+  - name
+  - city
+  - price
+  - is_contract_price
+  - is_nds_price
+  - is_draft
+  - floor_space
+  - description
+  - wishes
+  - specification
+  - attachments
+  - services
+  - objects
+  - status
+  - reception_start
+  - reception_end
+  - work_start
+  - work_end
+  - created_at
+  - updated_at
+properties:
+  id:
+    type: integer
+  organization:
+    $ref: "Organization.yaml"
+  name:
+    type: string
+  city:
+    $ref: "City.yaml"
+  price:
+    type: number
+  is_contract_price:
+    type: boolean
+  is_nds_price:
+    type: boolean
+  is_draft:
+    type: boolean
+  floor_space:
+    type: integer
+  description:
+    type: string
+  wishes:
+    type: string
+  specification:
+    type: string
+    format: uri
+  attachments:
+    type: array
+    items:
+      type: string
+      format: uri
+    maxItems: 8
+  services:
+    $ref: "catalog/Services.yaml"
+  objects:
+    $ref: "catalog/Objects.yaml"
+  status:
+    $ref: "../properties/status.yaml"
+  verification_status:
+    $ref: "../properties/verification_status.yaml"
+  reception_start:
+    type: string
+    format: date-time
+    description: "дата начала приема заявок"
+  reception_end:
+    type: string
+    format: date-time
+    description: "дата окончания приема заявок"
+  work_start:
+    type: string
+    format: date-time
+  work_end:
+    type: string
+    format: date-time
+  created_at:
+    type: string
+    format: date-time
+  updated_at:
+    type: string
+    format: date-time

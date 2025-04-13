@@ -1,0 +1,11 @@
+{
+  "name": "contractors_objects",
+  "fields": [
+    {
+      "name": "contractor_id",
+      "type": "string",
+      "reference": "organizations.id"
+    },
+    { "name": "object_id", "type": "string", "reference": "objects.id" }
+  ]
+}

@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package models.v1;
+
+import "google/protobuf/timestamp.proto";
+
+message EventContext {
+    google.protobuf.Timestamp timestamp = 1;
+    optional int64 user_id = 2;
+    optional int64 organization_id = 3;
+}

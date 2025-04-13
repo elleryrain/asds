@@ -1,0 +1,19 @@
+type: object
+required:
+  - answer
+properties:
+  answer:
+    oneOf:
+      - type: string
+      - type: array
+        items:
+          type: string
+    description: The answer to the question
+  comment:
+    type: string
+    description: Optional comment for the answer
+example:   
+  answer:
+    - "Удобно"
+    - "Неудобно"
+  comment: "Смешанные чувства"

@@ -1,0 +1,31 @@
+post:
+  tags:
+    - notifications
+  summary: Mark notification as read
+  description: Помечает уведомление как прочитанное.
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: notificationID
+      in: path
+      required: true
+      description: Уникальный идентификатор уведомления.
+      schema:
+        type: integer
+  responses:
+    '200':
+      description: Success.
+    '403':
+      description: Недостаточно прав.
+      content:
+        application/json:
+          schema:
+            $ref: "../../schemas/WrappedError.yaml"
+    '404':
+      description: Уведомление не найдено.
+      content:
+        application/json:
+          schema:
+            $ref: "../../schemas/WrappedError.yaml"
+    default:
+      $ref: "../../responses/Error.yaml"

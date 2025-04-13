@@ -1,0 +1,8 @@
+allOf:
+  - $ref: "User.yaml"
+  - type: object
+    required:
+      - organization
+    properties:
+      organization:
+        $ref: "./Organization.yaml"

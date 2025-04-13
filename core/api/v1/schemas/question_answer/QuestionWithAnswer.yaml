@@ -1,0 +1,8 @@
+type: object
+required: 
+  - question
+properties:
+  question:
+    $ref: "./QuestionAnswer.yaml"
+  answer:
+    $ref: "./QuestionAnswer.yaml"

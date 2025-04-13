@@ -1,0 +1,55 @@
+get:
+  tags:
+    - organizations
+  summary: Get organizations
+  description: |-
+    List all organizations
+
+    Для получения всех организаций (включая неверифицированные)
+    **[Role](https://youtrack.ubrato.ru/articles/UBR-A-7/Roli-privilegii) required**:
+    'Employee' or higher.
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: verified
+      in: query
+      description: Фильтрует результат и включает только верифицированные компании(не работает)
+      schema:
+        type: boolean
+        default: true
+    - name: page
+      in: query
+      description: Номер страницы
+      required: false
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+    - name: per_page
+      in: query
+      description: Количество элементов на странице
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 100
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+              - pagination
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: "../../schemas/Organization.yaml"
+              pagination:
+                $ref: "../../schemas/Pagination.yaml"
+    default:
+      $ref: "../../responses/Error.yaml"

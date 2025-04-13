@@ -1,0 +1,6 @@
+type: string
+enum:
+  - invalid
+  - in_review
+  - declined
+  - approved

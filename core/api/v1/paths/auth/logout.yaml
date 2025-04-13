@@ -1,0 +1,24 @@
+post:
+  tags:
+    - auth
+  summary: Logout User
+  parameters:
+    - name: ubrato_session
+      in: cookie
+      required: true
+      description: The session ID for the user.
+      schema:
+        type: string
+  security:
+    - cookieAuth: []
+  description: Terminates the user session.
+  responses:
+    '204':
+      description: Success
+      headers:
+        Set-Cookie:
+          schema:
+            type: string
+            example: ubrato_session=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly; Secure; SameSite=Lax
+    default:
+      $ref: "../../responses/Error.yaml"

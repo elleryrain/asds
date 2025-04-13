@@ -1,0 +1,16 @@
+type: object
+required:
+  - id
+  - organization
+  - tender_id
+  - accepted
+properties:
+  id:
+    type: integer
+  organization:
+    $ref: "Organization.yaml"
+  tender_id:
+    type: integer
+  accepted:
+     $ref: "../properties/accepted.yaml"
+  

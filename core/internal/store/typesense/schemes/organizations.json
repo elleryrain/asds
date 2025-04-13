@@ -1,0 +1,53 @@
+{
+  "name": "organizations",
+  "enable_nested_fields": true,
+  "fields": [
+    { "name": "id", "type": "string" },
+    { "name": "brand_name", "type": "string" },
+    { "name": "full_name", "type": "string" },
+    { "name": "short_name", "type": "string" },
+    { "name": "inn", "type": "string" },
+    { "name": "okpo", "type": "string" },
+    { "name": "ogrn", "type": "string" },
+    { "name": "kpp", "type": "string" },
+    { "name": "tax_code", "type": "string" },
+    { "name": "address", "type": "string" },
+    { "name": "avatar_url", "type": "string", "optional": true },
+    { "name": "description", "type": "string" },
+    {
+      "name": "emails",
+      "type": "object[]",
+      "fields": [
+        { "name": "contact", "type": "string" },
+        { "name": "info", "type": "string" }
+      ]
+    },
+    {
+      "name": "phones",
+      "type": "object[]",
+      "fields": [
+        { "name": "contact", "type": "string" },
+        { "name": "info", "type": "string" }
+      ]
+    },
+    {
+      "name": "messengers",
+      "type": "object[]",
+      "fields": [
+        { "name": "contact", "type": "string" },
+        { "name": "info", "type": "string" }
+      ]
+    },
+    {
+      "name": "portfolio_id",
+      "type": "string",
+      "reference": "portfolios.id",
+      "optional": true
+    },
+    { "name": "verification_status", "type": "string" },
+    { "name": "is_contractor", "type": "bool" },
+    { "name": "is_banned", "type": "bool" },
+    { "name": "created_at", "type": "string" },
+    { "name": "updated_at", "type": "string" }
+  ]
+}

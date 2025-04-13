@@ -1,0 +1,23 @@
+get:
+  tags:
+    - catalog
+  summary: Retrieve all measurements
+  description: Возвращает список измерений
+  security:
+    - bearerAuth: []
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: "../../schemas/catalog/Measure.yaml"
+    default:
+      $ref: "../../responses/Error.yaml"

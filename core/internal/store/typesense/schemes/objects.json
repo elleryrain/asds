@@ -1,0 +1,9 @@
+{
+  "name": "objects",
+  "enable_nested_fields": true,
+  "fields": [
+    { "name": "id", "type": "string" },
+    { "name": "parent_id", "type": "string" },
+    { "name": "name", "type": "string" }
+  ]
+}

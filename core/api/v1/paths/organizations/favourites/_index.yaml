@@ -1,0 +1,110 @@
+get:
+  tags:
+    - organizations
+  summary: Get favourites
+  description: |-
+   Получение списка избранного.
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: organizationID
+      required: true
+      in: path
+      description: ID организации
+      schema:
+        type: integer
+        minimum: 1
+    - name: object_type
+      required: true
+      in: query
+      description: Фильтрация результата по типам избранных объектов
+      schema:
+        $ref: "../../../properties/favourite_type.yaml"
+    - name: page
+      in: query
+      description: Номер страницы
+      required: false
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+    - name: per_page
+      in: query
+      description: Количество элементов на странице
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 100
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+              - pagination
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: "../../../schemas/Favourites.yaml"
+
+              pagination:
+                $ref: "../../../schemas/Pagination.yaml"
+    default:
+      $ref: "../../../responses/Error.yaml"
+
+post:
+  tags:
+    - organizations
+  summary: Add object in favourites
+  description: |-
+    Добавление объекта в список избранного.
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: organizationID
+      required: true
+      in: path
+      description: ID организации
+      schema:
+        type: integer
+        minimum: 1
+    - name: object_type
+      required: true
+      in: query
+      description: Фильтрация результата по типам избарнных объектов
+      schema:
+        $ref: "../../../properties/favourite_type.yaml"
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - object_id
+          properties:
+            object_id:
+              type: integer
+              example: 1
+  responses:
+    '201':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - id
+            properties:
+              id: 
+                type: integer
+                example: 1
+
+    default:
+      $ref: "../../../responses/Error.yaml"

@@ -1,0 +1,27 @@
+type: object
+required:
+  - id
+  - tender_id
+  - title
+  - content
+  - verification_status
+  - created_at
+properties:
+  id:
+    type: integer
+  tender_id:
+   type: integer
+   example: 1
+  title:
+    type: string
+  content:
+    type: string
+  attachments:
+    type: array
+    items:
+      type: string
+  verification_status:
+    type: string
+  created_at:
+    type: string
+    format: date-time

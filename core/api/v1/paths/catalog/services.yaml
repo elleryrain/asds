@@ -1,0 +1,59 @@
+get:
+  tags:
+    - catalog
+  summary: Get a list of all available services
+  description: Lists all available services
+  security:
+    - bearerAuth: []
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                $ref: "../../schemas/catalog/Services.yaml"
+    default:
+      $ref: "../../responses/Error.yaml"
+post:
+  tags:
+    - catalog
+  summary: Create catalog service
+  description: |-
+    Creates catalog service
+
+    **[Role](https://youtrack.ubrato.ru/articles/UBR-A-7/Roli-privilegii) required**:
+    'Admin' or higher.
+  security:
+    - bearerAuth: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - name
+          properties:
+            name:
+              type: string
+            parent_id:
+              type: integer
+  responses:
+    '201':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                $ref: "../../schemas/catalog/Service.yaml"
+    default:
+      $ref: "../../responses/Error.yaml"

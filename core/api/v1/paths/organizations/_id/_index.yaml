@@ -1,0 +1,31 @@
+get:
+  tags:
+    - organizations
+  summary: Get organization by id
+  description: |-
+    Returns organization by id
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: organizationID
+      required: true
+      in: path
+      description: ID of organization
+      schema:
+        type: integer
+        minimum: 1
+      example: 1
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                $ref: "../../../schemas/Organization.yaml"
+    default:
+      $ref: "../../../responses/Error.yaml"

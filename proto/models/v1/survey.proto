@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package models.v1;
+
+enum SurveyType {
+    SURVEY_TYPE_REGISTRATION = 0;
+    SURVEY_TYPE_VERIFICATION = 1;
+    SURVEY_TYPE_FEEDBACK = 2;
+}
+
+message Survey {
+    string name = 1;
+    SurveyType type = 2;
+    string phone = 3;
+    string question = 4;
+}

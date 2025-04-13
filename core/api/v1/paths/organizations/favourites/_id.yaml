@@ -1,0 +1,22 @@
+delete:
+  tags:
+    - organizations
+  summary: Remove a object from the favourites
+  description: |-
+    Удаление объекта из избранного.
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: favouriteID
+      in: path
+      required: true
+      description: ID избранного объекта
+      schema:
+        type: integer
+        minimum: 1
+      example: 1
+  responses:
+    '204':
+      description: Успешное удаление
+    default:
+      $ref: "../../../responses/Error.yaml"

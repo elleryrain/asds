@@ -1,0 +1,11 @@
+{
+  "name": "contractors_cities",
+  "fields": [
+    {
+      "name": "contractor_id",
+      "type": "string",
+      "reference": "organizations.id"
+    },
+    { "name": "city_id", "type": "string", "reference": "cities.id" }
+  ]
+}

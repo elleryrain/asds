@@ -1,0 +1,11 @@
+type: string
+enum:
+  - invalid
+  - draft
+  - on moderation
+  - reception not started
+  - reception
+  - selecting contractor
+  - contractor selected
+  - contractor not selected
+  - removed from publication

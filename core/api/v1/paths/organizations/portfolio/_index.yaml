@@ -1,0 +1,85 @@
+get:
+  tags:
+    - organizations
+  summary: Get all portfolios for contractor
+  description: |-
+    Получает список всех портфолио для исполнителя.
+  parameters:
+    - name: organizationID
+      in: path
+      required: true
+      description: Уникальный идентификатор организации
+      schema:
+        type: integer
+        minimum: 1
+      example: 1
+  responses:
+    '200':
+      description: Список портфолио
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: "../../../schemas/Portfolio.yaml"
+                maxItems: 10
+    default:
+      $ref: "../../../responses/Error.yaml"
+
+post:
+  tags:
+    - organizations
+  summary: Add a portfolio to the contractor's profile
+  description: |-
+    Добавляет портфолио в профиль исполнителя.
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: organizationID
+      required: true
+      in: path
+      description: ID of organization
+      schema:
+        type: integer
+        minimum: 1
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - title
+            - description
+            - attachments
+          properties:
+            title:
+              type: string
+              example: Портфолио 1
+            description:
+              $ref: "../../../properties/description.yaml"
+            attachments:
+              type: array
+              items:
+                type: string
+                format: uri
+              maxItems: 8
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                $ref: "../../../schemas/Portfolio.yaml"
+    default:
+      $ref: "../../../responses/Error.yaml"

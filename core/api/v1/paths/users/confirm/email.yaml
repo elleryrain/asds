@@ -1,0 +1,24 @@
+post:
+  tags:
+    - users
+  summary: Confirm email
+  description: |-
+    Confirm email use a code from mail
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - code
+          properties:
+            user_id:
+              type: integer
+            code:
+              type: string
+  responses:
+    '200':
+      description: Success
+    default:
+      $ref: "../../../responses/Error.yaml"

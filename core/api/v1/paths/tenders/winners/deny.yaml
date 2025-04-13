@@ -1,0 +1,22 @@
+post:
+  tags:
+    - tenders
+  summary: Deny of work completion
+  description: |-
+    Отказ от выполнения работы
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: winnerID
+      required: true
+      in: path
+      description: ID of winner
+      schema:
+        type: integer
+        minimum: 1
+        example: 1
+  responses:
+    '200':
+      description: Success
+    default:
+      $ref: "../../../responses/Error.yaml"

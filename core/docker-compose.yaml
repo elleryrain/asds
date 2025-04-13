@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+  postgres:
+    image: postgres
+    container_name: ubrato-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "ubrato"
+# service-nats:
+#   container_name: service-nats
+#   image: nats:2.10.14-alpine3.19
+#   ports:
+#     - "4222:4222"
+#     - "6222:6222"
+#     - "8222:8222"
+#   command:
+#     - "--name=service-nats"
+#     - "--http_port=8222"
+#     - "--js"
+#     - "--sd=/data"

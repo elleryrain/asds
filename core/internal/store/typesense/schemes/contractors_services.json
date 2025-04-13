@@ -1,0 +1,21 @@
+{
+  "name": "contractors_services",
+  "enable_nested_fields": true,
+  "fields": [
+    {
+      "name": "contractor_id",
+      "type": "string",
+      "reference": "organizations.id"
+    },
+    { "name": "service_id", "type": "string", "reference": "services.id" },
+    {
+      "name": "measure",
+      "type": "object",
+      "fields": [
+        { "name": "id", "type": "string" },
+        { "name": "name", "type": "string" }
+      ]
+    },
+    { "name": "price", "type": "int64" }
+  ]
+}

@@ -1,0 +1,41 @@
+get:
+  tags:
+    - notifications
+  summary: Get user's notification history
+  description: |-
+    Возвращает историю уведомлений для указанного пользователя.
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: userID
+      in: path
+      required: true
+      description: Идентификатор пользователя.
+      schema:
+        type: integer
+  responses:
+    '200':
+      description: Success.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: "../../schemas/Notification.yaml"
+    '403':
+      description: Недостаточно прав.
+      content:
+        application/json:
+          schema:
+            $ref: "../../schemas/WrappedError.yaml"
+    '404':
+      description: Пользователь не найден.
+      content:
+        application/json:
+          schema:
+            $ref: "../../schemas/WrappedError.yaml"
+    default:
+      $ref: "../../responses/Error.yaml"

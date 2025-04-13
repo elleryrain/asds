@@ -1,0 +1,43 @@
+get:
+  tags:
+    - questionnaire
+  summary: Get all contractor's questionnaire answers
+  description: |-
+    Get all contractor's questionnaire answers with pagination
+
+    **[Role](https://youtrack.ubrato.ru/articles/UBR-A-7/Roli-privilegii) required**:
+    'Employee' or higher.
+  security:
+  - bearerAuth: []
+  parameters:
+    - name: offset
+      in: query
+      description: Сдвиг начала каждой страницы на указанное количество единиц.
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    - name: limit
+      in: query
+      description: Максимальное количество объектов, которое может вернуть запрос.
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 100
+        default: 100
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: "../../schemas/Questionnaire.yaml"
+    default:
+      $ref: "../../responses/Error.yaml"

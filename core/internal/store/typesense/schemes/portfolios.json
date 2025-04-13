@@ -1,0 +1,11 @@
+{
+  "name": "portfolios",
+  "fields": [
+    { "name": "id", "type": "string" },
+    { "name": "title", "type": "string" },
+    { "name": "description", "type": "string" },
+    { "name": "attachments", "type": "string[]" },
+    { "name": "created_at", "type": "string" },
+    { "name": "updated_at", "type": "string" }
+  ]
+}

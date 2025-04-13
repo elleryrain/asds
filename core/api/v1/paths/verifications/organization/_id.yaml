@@ -1,0 +1,65 @@
+post:
+  tags:
+    - verifications
+  summary: Send verification request
+  description: |-
+    Отправляет документы организации на верификацию
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: organizationID
+      required: true
+      in: path
+      description: ID of organization
+      schema:
+        type: integer
+        minimum: 1
+      example: 1
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: array
+          minItems: 4
+          maxItems: 4
+          items:
+            $ref: "../../../schemas/Attachment.yaml"
+  responses:
+    '200':
+      description: Success
+    default:
+      $ref: "../../../responses/Error.yaml"
+get:
+  tags:
+    - verifications
+  summary: Get verification requests
+  description: |-
+    Получает историю верификации организации
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: organizationID
+      required: true
+      in: path
+      description: ID of organization
+      schema:
+        type: integer
+        minimum: 1
+      example: 1
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: "../../../schemas/VerificationRequest.yaml"
+    default:
+      $ref: "../../../responses/Error.yaml"

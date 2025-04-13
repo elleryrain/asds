@@ -1,0 +1,51 @@
+get:
+  tags:
+    - organizations
+  summary: Get contractors
+  description: |-
+    Получить всех исполнителей статусом approve с информацией об их профиле.
+  parameters:
+    - name: page
+      in: query
+      description: Номер страницы
+      required: false
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+    - name: per_page
+      in: query
+      description: Количество элементов на странице
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 100
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+              - pagination
+            properties:
+              data:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - organization
+                    - profile
+                  properties:
+                    organization:
+                      $ref: "../../schemas/Organization.yaml"
+                    profile:
+                      $ref: "../../schemas/ContractorInfo.yaml"
+              pagination:
+                $ref: "../../schemas/Pagination.yaml"
+    default:
+      $ref: "../../responses/Error.yaml"

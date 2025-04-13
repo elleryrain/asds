@@ -1,0 +1,10 @@
+allOf:
+  - $ref: "User.yaml"
+  - type: object
+    required:
+      - position
+    properties:
+      position:
+        type: string
+      role:
+        $ref: "../properties/role.yaml"

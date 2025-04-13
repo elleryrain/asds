@@ -1,0 +1,2 @@
+api/gen/**/* -diff
+api/bundle.yaml -diff

@@ -1,0 +1,223 @@
+openapi: 3.0.3
+info:
+  title: Ubrato core
+  description: ubrato core oas
+  version: 1.0.0
+servers:
+  - description: local
+    url: /
+  - description: dev
+    url: https://api.ubrato.ru
+paths:
+  /v1/notifications/{notificationID}/read:
+    post:
+      tags:
+        - notifications
+      summary: Mark notification as read
+      description: Помечает уведомление как прочитанное.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: notificationID
+          in: path
+          required: true
+          description: Уникальный идентификатор уведомления.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Success.
+        '403':
+          description: Недостаточно прав.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WrappedError'
+        '404':
+          description: Уведомление не найдено.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WrappedError'
+        default:
+          $ref: '#/components/responses/Error'
+  /v1/notifications/{userID}:
+    get:
+      tags:
+        - notifications
+      summary: Get user's notification history
+      description: Возвращает историю уведомлений для указанного пользователя.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: userID
+          in: path
+          required: true
+          description: Идентификатор пользователя.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Notification'
+        '403':
+          description: Недостаточно прав.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WrappedError'
+        '404':
+          description: Пользователь не найден.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WrappedError'
+        default:
+          $ref: '#/components/responses/Error'
+  /v1/notifications/{userID}/stream:
+    get:
+      tags:
+        - notifications
+      summary: Get real-time notifications for a user (swager does not support)
+      description: |-
+        **Не работает в свагере**
+
+        Подключение для получения актуальных уведомлений пользователя через SSE.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: userID
+          in: path
+          required: true
+          description: Уникальный идентификатор пользователя.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Succes.
+          content:
+            text/event-stream:
+              schema:
+                type: string
+                example: |+
+                  data: {"id": 1, "title": "Новое уведомление", "is_read": false}
+
+        '403':
+          description: Недостаточно прав.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WrappedError'
+        '404':
+          description: Пользователь не найден.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WrappedError'
+        default:
+          $ref: '#/components/responses/Error'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Error:
+      type: object
+      required:
+        - code
+        - message
+        - details
+      properties:
+        code:
+          type: string
+          description: application-specific error code
+          example: ERR_INTERNAL
+        message:
+          type: string
+          description: error message
+          example: invalid email
+        details:
+          type: object
+          additionalProperties: true
+    WrappedError:
+      type: object
+      required:
+        - error
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+    ActionButton:
+      type: object
+      required:
+        - text
+        - url
+        - styled
+      properties:
+        text:
+          type: string
+        url:
+          type: string
+          format: uri
+        styled:
+          type: boolean
+      example:
+        text: Click Me
+        url: https://example.com
+        styled: true
+    status:
+      type: string
+      enum:
+        - invalid
+        - in_review
+        - declined
+        - approved
+    StatusBlock:
+      type: object
+      required:
+        - text
+        - status
+      properties:
+        text:
+          type: string
+          example: my status
+        status:
+          $ref: '#/components/schemas/status'
+    Notification:
+      type: object
+      required:
+        - id
+        - title
+        - user_id
+        - is_read
+      properties:
+        id:
+          type: integer
+        user_id:
+          type: integer
+        title:
+          type: string
+        comment:
+          type: string
+        actionButton:
+          $ref: '#/components/schemas/ActionButton'
+        statusBlock:
+          $ref: '#/components/schemas/StatusBlock'
+        is_read:
+          type: boolean
+  responses:
+    Error:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WrappedError'

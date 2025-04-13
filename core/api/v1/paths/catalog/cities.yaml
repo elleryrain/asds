@@ -1,0 +1,44 @@
+post:
+  tags:
+    - catalog
+  summary: Add city to catalog
+  description: |-
+    Adds city to catalog
+
+    **[Role](https://youtrack.ubrato.ru/articles/UBR-A-7/Roli-privilegii) required**:
+    'Admin' or higher.
+  security:
+    - bearerAuth: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - name
+            - region_id
+          properties:
+            name:
+              type: string
+            region_id:
+              type: integer
+  responses:
+    '201':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                type: object
+                required: 
+                  - city
+                properties:
+                  city:
+                    $ref: "../../schemas/City.yaml"
+    default:
+      $ref: "../../responses/Error.yaml"

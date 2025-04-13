@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+package models.v1;
+
+message Notification {                     
+  NotifiedUser user = 1;
+  Verification verification = 2;
+  Object object = 3;
+}
+
+message NotifiedUser {
+  int32 id = 1;                                     
+  bool is_contractor = 2;  
+}
+
+message Verification {
+  string comment = 1;   
+  Status status = 2;
+}
+
+message Object {
+  int32 id = 1;     
+  ObjectType type = 2;
+  Tender tender = 3;
+}
+
+message Tender {
+  int32 id = 1; 
+  string title = 2;
+  google.protobuf.Timestamp reception_start = 3;
+}
+
+enum ObjectType {
+  ObjectTypeInvalid = 0;
+  ObjectTypeOrganization = 1;
+  ObjectTypeTender = 2;
+  ObjectTypeAddition = 3;
+  ObjectTypeQuestionAnswer = 4;
+}
+
+enum Status {
+  STATUS_INVALID = 0;   
+  STATUS_IN_REVIEW = 1;  
+  STATUS_DECLINED = 2;  
+  STATUS_APPROVED = 3;   
+}

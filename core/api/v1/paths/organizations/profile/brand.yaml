@@ -1,0 +1,35 @@
+put:
+  tags:
+    - organizations
+  summary: Update organization brand info
+  description: |-
+    Обновляет название бренда или URL изображения для организации.
+  security:
+  - bearerAuth: []
+  parameters:
+    - name: organizationID
+      required: true
+      in: path
+      description: ID of organization
+      schema:
+        type: integer
+        minimum: 1
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            brand:
+              type: string
+              description: Название бренда
+              example: "Ubrato"
+            avatar_url:
+              type: string
+              format: uri
+  responses:
+    '200':
+      description: Success
+    default:
+      $ref: "../../../responses/Error.yaml"

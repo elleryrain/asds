@@ -1,0 +1,90 @@
+put:
+  tags:
+    - organizations
+  summary: Update customer organization profile
+  description: |-
+    Обновляет описание компании или список локаций в профиле заказчика.
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: organizationID
+      required: true
+      in: path
+      description: ID of organization
+      schema:
+        type: integer
+        minimum: 1
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            description:
+              $ref: "../../../properties/description.yaml"
+            city_ids:
+              type: array
+              description: Локаций заказчика
+              items:
+                type: integer
+                example: 1  
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                type: object
+                required:
+                  - organization
+                  - profile
+                properties:
+                  organization:
+                    $ref: "../../../schemas/Organization.yaml"
+                  profile:
+                    $ref: "../../../schemas/CustomerInfo.yaml"
+    default:
+      $ref: "../../../responses/Error.yaml"
+
+get:
+  tags:
+    - organizations
+  summary: Get customer organization profile
+  description: |-
+    Возвращает информацию об организации и профиле заказчика.
+  parameters:
+    - name: organizationID
+      required: true
+      in: path
+      description: ID of organization
+      schema:
+        type: integer
+        minimum: 1
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                type: object
+                required:
+                  - organization
+                  - profile
+                properties:
+                  organization:
+                    $ref: "../../../schemas/Organization.yaml"
+                  profile:
+                    $ref: "../../../schemas/CustomerInfo.yaml"
+    default:
+      $ref: "../../../responses/Error.yaml"

@@ -1,0 +1,34 @@
+get:
+  tags:
+    - organizations
+  summary: Get all portfolios for contractor
+  description: |-
+    Получает список всех портфолио для исполнителя.
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: organizationID
+      in: path
+      required: true
+      description: Уникальный идентификатор организации
+      schema:
+        type: integer
+        minimum: 1
+      example: 1
+  responses:
+    '200':
+      description: Список портфолио
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: "../../schemas/Portfolio.yaml"
+                maxItems: 10
+    default:
+      $ref: "../../responses/Error.yaml"

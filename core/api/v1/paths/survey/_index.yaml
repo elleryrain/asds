@@ -1,0 +1,32 @@
+post:
+  tags:
+    - survey
+  summary: Respond to a survey
+  security:
+  - {}
+  - bearerAuth: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - name
+            - type
+            - phone
+            - question
+          properties:
+            name:
+              type: string
+            type:
+              $ref: "../../properties/survey.yaml"
+            phone:
+              $ref: "../../properties/phone.yaml"
+            question:
+              type: string
+  responses:
+    '200':
+      description: Success
+    default:
+      $ref: "../../responses/Error.yaml"

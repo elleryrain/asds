@@ -1,0 +1,121 @@
+get:
+  tags:
+    - tenders
+  summary: Get tender by id
+  description: |-
+    Returns tender by id
+
+    Для получения неверифицированного тендера
+    **[Role](https://youtrack.ubrato.ru/articles/UBR-A-7/Roli-privilegii) required**:
+    'Employee' or higher.
+  security:
+  - bearerAuth: []
+  parameters:
+    - name: tenderID
+      required: true
+      in: path
+      description: ID of tender
+      schema:
+        type: integer
+        minimum: 1
+      example: 1
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                $ref: "../../../schemas/Tender.yaml"
+    default:
+      $ref: "../../../responses/Error.yaml"
+put:
+  tags:
+    - tenders
+  summary: Update tender by id
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: tenderID
+      required: true
+      in: path
+      description: ID of tender
+      schema:
+        type: integer
+        minimum: 1
+      example: 1
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+            city:
+              type: integer
+            price:
+              type: number
+            is_contract_price:
+              type: boolean
+            is_nds_price:
+              type: boolean
+            floor_space:
+              type: integer
+            description:
+              type: string
+            wishes:
+              type: string
+            specification:
+              type: string
+              format: uri
+            attachments:
+              type: array
+              items:
+                type: string
+                format: uri
+              maxItems: 8
+            services:
+              type: array
+              items:
+                type: integer
+            objects:
+              type: array
+              items:
+                type: integer
+            is_draft:
+              type: boolean
+              default: false
+            reception_start:
+              type: string
+              format: date-time
+              description: "дата начала приема заявок"
+            reception_end:
+              type: string
+              format: date-time
+              description: "дата окончания приема заявок"
+            work_start:
+              type: string
+              format: date-time
+            work_end:
+              type: string
+              format: date-time
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                $ref: "../../../schemas/Tender.yaml"
+    default:
+      $ref: "../../../responses/Error.yaml"

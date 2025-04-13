@@ -1,0 +1,12 @@
+{
+    "name": "customers_cities",
+    "fields": [
+      {
+        "name": "customer_id",
+        "type": "string",
+        "reference": "organizations.id"
+      },
+      { "name": "city_id", "type": "string", "reference": "cities.id" }
+    ]
+  }
+  

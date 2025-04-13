@@ -1,0 +1,39 @@
+get:
+  tags:
+    - notifications
+  summary: Get real-time notifications for a user (swager does not support)
+  description: |-
+    **Не работает в свагере**
+
+    Подключение для получения актуальных уведомлений пользователя через SSE.
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: userID
+      in: path
+      required: true
+      description: Уникальный идентификатор пользователя.
+      schema:
+        type: integer
+  responses:
+    '200':
+      description: Succes.
+      content:
+        text/event-stream:
+          schema:
+            type: string
+            example: "data: {\"id\": 1, \"title\": \"Новое уведомление\", \"is_read\": false}\n\n"
+    '403':
+      description: Недостаточно прав.
+      content:
+        application/json:
+          schema:
+            $ref: "../../schemas/WrappedError.yaml"
+    '404':
+      description: Пользователь не найден.
+      content:
+        application/json:
+          schema:
+            $ref: "../../schemas/WrappedError.yaml"
+    default:
+      $ref: "../../responses/Error.yaml"

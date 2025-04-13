@@ -1,0 +1,9 @@
+type: object
+required:
+  - organization
+  - profile
+properties:
+  organization:
+    $ref: "./Organization.yaml"
+  profile:
+    $ref: "./ContractorInfo.yaml"

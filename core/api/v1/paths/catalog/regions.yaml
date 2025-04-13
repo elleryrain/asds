@@ -1,0 +1,36 @@
+post:
+  tags:
+    - catalog
+  summary: Add region to catalog
+  description: |-
+    Adds region to catalog
+
+    **[Role](https://youtrack.ubrato.ru/articles/UBR-A-7/Roli-privilegii) required**:
+    'Admin' or higher.
+  security:
+    - bearerAuth: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - name
+          properties:
+            name:
+              type: string
+  responses:
+    '201':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                $ref: "../../schemas/Region.yaml"
+    default:
+      $ref: "../../responses/Error.yaml"

@@ -1,0 +1,8 @@
+version: v1
+name: git.ubrato.ru/ubrato/ubrato-proto
+breaking:
+  use:
+    - FILE
+lint:
+  use:
+    - DEFAULT

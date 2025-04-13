@@ -1,0 +1,78 @@
+post:
+  tags:
+    - tenders
+  summary: Send addition for tender
+  description: |-
+    Добавление дополнительной информации к тендеру
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: tenderID
+      required: true
+      in: path
+      description: ID of tender
+      schema:
+        type: integer
+        minimum: 1
+      example: 1
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - title
+            - content
+          properties:
+            title:
+              type: string
+            content:
+              type: string
+            attachments:
+              type: array
+              items:
+                type: string
+                format: binary
+  responses:
+    '200':
+      description: Success
+    default:
+      $ref: "../../../responses/Error.yaml"
+
+get:
+  tags:
+    - tenders
+  summary: Get additions for tender
+  description: |-
+    Получение дополнительной информации для тендера.
+
+    Создатель тендера не имеет ограничений на статус верификации.
+  security:
+    - bearerAuth: []
+    - {}
+  parameters:
+    - name: tenderID
+      required: true
+      in: path
+      description: ID of tender
+      schema:
+        type: integer
+        minimum: 1
+      example: 1
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: "../../../schemas/Addition.yaml"
+    default:
+      $ref: "../../../responses/Error.yaml"

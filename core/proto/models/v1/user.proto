@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package models.v1;
+
+import "google/protobuf/timestamp.proto";
+import "models/v1/organization.proto";
+
+enum UserRole {
+    USER_ROLE_USER = 0;
+    USER_ROLE_ADMIN = 1;
+}
+
+message User {
+    int64 id = 1;
+    string email = 2;
+    string phone = 3;
+    string first_name = 4;
+    string last_name = 5;
+    string middle_name = 6;
+    optional string avatar_url = 7;
+    bool email_verified = 8;
+    UserRole role = 9;
+    models.v1.Organization organization = 10;
+    google.protobuf.Timestamp created_at = 11;
+    google.protobuf.Timestamp updated_at = 12;
+}

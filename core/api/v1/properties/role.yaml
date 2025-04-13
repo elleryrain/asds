@@ -1,0 +1,6 @@
+type: string
+enum:
+  - user
+  - employee
+  - admin
+  - super_admin

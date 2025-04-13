@@ -1,0 +1,17 @@
+type: object
+required:
+  - text
+  - url
+  - styled
+properties:
+  text:
+    type: string
+  url:
+    type: string
+    format: uri
+  styled:
+    type: boolean
+example:
+  text: "Click Me"
+  url: "https://example.com"
+  styled: true

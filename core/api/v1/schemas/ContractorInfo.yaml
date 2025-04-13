@@ -1,0 +1,15 @@
+type: object
+properties:
+  description:
+    $ref: "../properties/description.yaml"
+  cities:
+    type: array
+    description: Локации заказчика
+    items:
+      $ref: "./City.yaml"
+  services:
+    type: array
+    items:
+      $ref: "catalog/ServiceWithPrice.yaml"
+  objects:
+    $ref: "catalog/Objects.yaml"

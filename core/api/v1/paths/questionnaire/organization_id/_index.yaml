@@ -1,0 +1,40 @@
+post:
+  tags:
+    - questionnaire
+  summary: Save the contractor's answers to the questionnaire
+  description: |-
+    Save the contractor's answers to the questionnaire
+  security:
+  - bearerAuth: []
+  parameters:
+    - name: organizationID
+      required: true
+      in: path
+      description: ID of organization
+      schema:
+        type: integer
+        minimum: 1
+      example: 1
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - answers
+            - is_completed
+          properties:
+            answers:
+              type: array
+              items:
+                $ref: "../../../schemas/QuestionnaireAnswer.yaml"
+            is_completed:
+              type: boolean
+              description: the questionnaire is completed
+              default: false
+  responses:
+    '200':
+      description: Success
+    default:
+      $ref: "../../../responses/Error.yaml"

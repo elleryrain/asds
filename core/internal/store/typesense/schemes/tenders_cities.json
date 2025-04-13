@@ -1,0 +1,11 @@
+{
+  "name": "tenders_cities",
+  "fields": [
+    {
+      "name": "tender_id",
+      "type": "string",
+      "reference": "tenders.id"
+    },
+    { "name": "city_id", "type": "string", "reference": "cities.id" }
+  ]
+}

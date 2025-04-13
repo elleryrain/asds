@@ -1,0 +1,8 @@
+type: string
+enum:
+  - organization
+  - tender
+  - addition
+  - question-answer
+  - invalid
+  

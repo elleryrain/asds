@@ -1,0 +1,28 @@
+get:
+  tags:
+    - suggest
+  summary: Suggest city
+  description: Suggests a city with provided city name
+  parameters:
+  - name: name
+    required: false
+    in: query
+    description: name of a city
+    schema:
+      type: string
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: ../../schemas/City.yaml
+    default:
+      $ref: "../../responses/Error.yaml"

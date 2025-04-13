@@ -1,0 +1,73 @@
+post:
+  tags:
+    - tenders
+  summary: Send winners for tender
+  description: |-
+    Добавление победителя торгов
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: tenderID
+      required: true
+      in: path
+      description: ID of tender
+      schema:
+        type: integer
+        minimum: 1
+      example: 1
+    - name: organizationID
+      required: true
+      in: query
+      description: ID of organization
+      schema:
+        type: integer
+        minimum: 1
+        example: 1
+  responses:
+    '201':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                $ref: "../../../schemas/Winners.yaml"
+    default:
+      $ref: "../../../responses/Error.yaml"
+
+get:
+  tags:
+    - tenders
+  summary: Get winners for tender
+  description: |-
+    Получение победителей торгов
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: tenderID
+      required: true
+      in: path
+      description: ID of tender
+      schema:
+        type: integer
+        minimum: 1
+      example: 1
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: "../../../schemas/Winners.yaml"
+    default:
+      $ref: "../../../responses/Error.yaml"

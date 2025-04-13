@@ -1,0 +1,31 @@
+type: object
+required:
+  - id
+  - tender_id
+  - organization_id
+  - price
+  - is_nds_price
+  - is_winner
+  - created_at
+properties:
+  id:
+    type: integer
+    example: 1
+  tender_id:
+    type: integer
+    example: 1
+  organization_id:
+    type: integer
+    example: 2
+  price:
+    type: integer
+    example: 1000
+  is_nds_price:
+    type: boolean
+    example: true
+  is_winner:
+    type: boolean
+    example: false
+  created_at:
+    type: string
+    format: date-time

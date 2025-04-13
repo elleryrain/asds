@@ -1,0 +1,24 @@
+openapi: 3.0.3
+servers:
+  - description: local
+    url: /
+  - description: dev
+    url: https://api.ubrato.ru
+info:
+  title: Ubrato core
+  description: ubrato core oas
+  version: 1.0.0
+paths:
+  /v1/notifications/{notificationID}/read:
+    $ref: "v1/paths/notification/read.yaml"
+  /v1/notifications/{userID}:
+    $ref: "v1/paths/notification/_index.yaml"
+  /v1/notifications/{userID}/stream:
+    $ref: "v1/paths/notification/events.yaml"
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

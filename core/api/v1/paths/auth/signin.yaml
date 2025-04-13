@@ -1,0 +1,45 @@
+post:
+  tags:
+    - auth
+  summary: Signin User
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - email
+            - password
+          properties:
+            email:
+              $ref: "../../properties/email.yaml"
+            password:
+              $ref: "../../properties/password.yaml"
+  responses:
+    '200':
+      description: Success
+      headers:
+        Set-Cookie:
+          schema: 
+            type: string
+            example: ubrato_session=7ff581a1-4dcf-4f53-a9cb-0ef408d4a7bb; Path=/; Max-Age=1727209098; HttpOnly; Secure; SameSite=Lax
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                type: object
+                required: 
+                  - user
+                  - access_token
+                properties:
+                  user:
+                    $ref: "../../schemas/RegularUser.yaml"
+                  access_token:
+                    type: string
+    default:
+      $ref: "../../responses/Error.yaml"

@@ -1,0 +1,3 @@
+type: string
+format: phone
+pattern: ^\+?\d{10,14}$

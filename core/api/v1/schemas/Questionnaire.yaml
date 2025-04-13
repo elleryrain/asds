@@ -1,0 +1,28 @@
+type: object
+required:
+  - id
+  - organization
+  - answers
+  - is_completed
+  - created_at
+properties:
+  id:
+    type: integer
+    example: 123
+  organization:
+   $ref: "./Organization.yaml"
+  answers:
+    type: array
+    items:
+      $ref: "./QuestionnaireAnswer.yaml"
+  is_completed:
+    type: boolean
+    example: true
+  completed_at:
+    type: string
+    format: date-time
+    example: "2024-12-02T15:30:00Z"
+  created_at:
+    type: string
+    format: date-time
+    example: "2024-12-02T15:30:00Z"

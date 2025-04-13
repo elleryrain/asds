@@ -1,0 +1,25 @@
+post:
+  tags:
+    - verifications
+  summary: Aprove verification request
+  description: |-
+    Aproving verification
+
+    **[Role](https://youtrack.ubrato.ru/articles/UBR-A-7/Roli-privilegii) required**:
+    'Employee' or higher.
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: requestID
+      required: true
+      in: path
+      description: ID of request
+      schema:
+        type: integer
+        minimum: 1
+      example: 1
+  responses:
+    '200':
+      description: Success
+    default:
+      $ref: "../../../responses/Error.yaml"

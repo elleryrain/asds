@@ -1,0 +1,16 @@
+{
+  "name": "cities",
+  "enable_nested_fields": true,
+  "fields": [
+    { "name": "id", "type": "string" },
+    { "name": "name", "type": "string" },
+    {
+      "name": "region",
+      "type": "object",
+      "fields": [
+        { "name": "id", "type": "string" },
+        { "name": "name", "type": "string" }
+      ]
+    }
+  ]
+}
