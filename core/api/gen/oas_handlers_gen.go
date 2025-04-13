@@ -242,29 +242,30 @@ func (s *Server) handleV1AuthRefreshPostRequest(args [0]string, argsEscaped bool
 			}
 		}
 
-		if ok := func() bool {
-		nextRequirement:
-			for _, requirement := range []bitset{
-				{0b00000001},
-			} {
-				for i, mask := range requirement {
-					if satisfied[i]&mask != mask {
-						continue nextRequirement
-					}
-				}
-				return true
-			}
-			return false
-		}(); !ok {
-			err = &ogenerrors.SecurityError{
-				OperationContext: opErrContext,
-				Err:              ogenerrors.ErrSecurityRequirementIsNotSatisfied,
-			}
-			defer recordError("Security", err)
-			s.cfg.ErrorHandler(ctx, w, r, err)
-			return
-		}
-	}
+	// 	if ok := func() bool {
+	// 	nextRequirement:
+	// 		for _, requirement := range []bitset{
+	// 			{0b00000001},
+	// 		} {
+	// 			for i, mask := range requirement {
+	// 				if satisfied[i]&mask != mask {
+	// 					continue nextRequirement
+	// 				}
+	// 			}
+	// 			return true
+	// 		}
+	// 		return false
+	// 	}(); !ok {
+	// 		err = &ogenerrors.SecurityError{
+	// 			OperationContext: opErrContext,
+	// 			Err:              ogenerrors.ErrSecurityRequirementIsNotSatisfied,
+	// 		}
+	// 		defer recordError("Security", err)
+	// 		s.cfg.ErrorHandler(ctx, w, r, err)
+	// 		return
+	// 	}
+	// }
+	
 	params, err := decodeV1AuthRefreshPostParams(args, argsEscaped, r)
 	if err != nil {
 		err = &ogenerrors.DecodeParamsError{
